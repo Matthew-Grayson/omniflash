@@ -8,16 +8,16 @@ class User(models.Model):
 
 class CardSet(models.Model):
     name = models.CharField(max_length=150)
-    authorId = models.BigIntegerField
+    authorId = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Flashcard(models.Model):
-    cardSetId = models.BigIntegerField
+    cardSetId = models.ForeignKey(CardSet, on_delete=models.CASCADE)
     front = models.CharField(max_length=255)
     back = models.TextField(max_length=1024)
 
 
 class Favorite(models.Model):
-    userId = models.BigIntegerField
-    cardSetId = models.BigIntegerField
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    cardSetId = models.ForeignKey(CardSet, on_delete=models.CASCADE())
 
